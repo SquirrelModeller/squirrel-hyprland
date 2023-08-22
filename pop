@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if the window name argument was provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <window name>"
+  exit 1
+fi
+
+# Get a list of open windows from eww
+window_list=$(eww -c /home/squirrel/.config/themes/eww/ windows)
+
+# Check if the target window name is present in the list
+if echo "$window_list" | grep -q "^*$1$"; then
+  eww -c  /home/squirrel/.config/themes/eww/ close $1
+else
+  eww -c  /home/squirrel/.config/themes/eww/ open $1
+fi
